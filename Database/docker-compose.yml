@@ -1,0 +1,54 @@
+version: "3.9"
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: it_ticket_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: it_ticket_db
+      MYSQL_USER: ituser
+      MYSQL_PASSWORD: itpassword
+    ports:
+      - "3306:3306"
+    volumes:
+      # Volume สำหรับเก็บข้อมูลจริง (ไม่หายเมื่อ container หยุด)
+      - mysql_data:/var/lib/mysql
+
+      # รันสคริปต์ init.sql ครั้งแรกตอนเริ่มสร้าง container
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+    networks:
+      - it_ticket_network
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: it_ticket_phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: rootpassword
+      UPLOAD_LIMIT: 128M
+    ports:
+      - "8888:80"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - it_ticket_network
+
+volumes:
+  mysql_data:
+
+networks:
+  it_ticket_network:
+    driver: bridge

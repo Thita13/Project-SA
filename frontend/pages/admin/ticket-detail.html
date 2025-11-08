@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ticket Detail - IT Support System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body class="bg-gray-50">
+    <div class="flex h-screen overflow-hidden">
+      <!-- Sidebar -->
+      <aside class="w-64 bg-indigo-800 text-white flex flex-col">
+        <div class="p-6 border-b border-indigo-600">
+          <div class="flex items-center gap-3">
+            <div
+              class="bg-white w-12 h-12 rounded-xl flex items-center justify-center"
+            >
+              <i class="fas fa-headset text-indigo-700 text-xl"></i>
+            </div>
+            <div>
+              <h2 class="font-bold text-lg">IT Support</h2>
+              <p class="text-xs text-indigo-200">System</p>
+            </div>
+          </div>
+        </div>
+
+        <nav class="flex-1 p-4 overflow-y-auto">
+          <a
+            href="/frontend/pages/admin/dashboard.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600 mb-2"
+          >
+            <i class="fas fa-home"></i>
+            <span>Dashboard</span>
+          </a>
+          <a
+            href="/frontend/pages/admin/createticket.html"
+            class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600 mb-2 transition"
+          >
+            <i class="fas fa-plus-circle"></i>
+            <span>Create Ticket</span>
+          </a>
+        </nav>
+
+        <div class="p-4 border-t border-indigo-600">
+          <button
+            onclick="logout()"
+            class="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-600 transition text-left"
+          >
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="flex-1 overflow-y-auto">
+        <header class="bg-white shadow-sm border-b px-6 py-4">
+          <div class="flex justify-between items-center">
+            <div class="flex items-center gap-4">
+              <a href="/frontend/pages/admin/dashboard.html" class="flex items-center gap-2 text-gray-700 hover:text-gray-900">
+                <i class="fas fa-arrow-left"></i>
+                <span class="font-medium">Back</span>
+              </a>
+              <h1 class="text-2xl font-bold text-gray-800">
+                Ticket Detail
+              </h1>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="relative">
+                <button class="relative p-2 hover:bg-gray-100 rounded-lg">
+                  <i class="fas fa-bell text-gray-600 text-xl"></i>
+                  <span
+                    class="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center"
+                    >5</span
+                  >
+                </button>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="text-right">
+                  <p class="font-semibold text-gray-800" id="userName"></p>
+                  <p class="text-xs text-gray-500">Administrator</p>
+                </div>
+                <div
+                  class="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold"
+                >
+                  A
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <!-- Ticket Content -->
+        <div class="max-w-7xl mx-auto px-6 py-6">
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Left Section - Ticket Details -->
+            <div class="lg:col-span-2 space-y-6">
+              <!-- Ticket Header -->
+              <div class="bg-white rounded-lg shadow-sm p-6">
+                <div class="flex items-start justify-between mb-6">
+                  <h1 class="text-2xl font-bold text-gray-900">
+                    #<span id="ticketId">0010</span> <span id="ticketTitle">คอมพิวเตอร์เปิดไม่ติด</span>
+                  </h1>
+                  <span id="ticketStatus"
+                    class="px-4 py-1.5 bg-green-500 text-white rounded-md font-medium text-sm"
+                  >
+                    Open
+                  </span>
+                </div>
+
+                <!-- Ticket Info Grid -->
+                <div class="space-y-3 text-sm">
+                  <div class="flex">
+                    <span class="font-medium text-gray-700 w-40">Ticket ID:</span>
+                    <span class="text-gray-900" id="displayTicketId">0010</span>
+                  </div>
+                  <div class="flex">
+                    <span class="font-medium text-gray-700 w-40">Created by:</span>
+                    <span class="text-gray-900" id="createdBy">Christina Juyu</span>
+                  </div>
+                  <div class="flex">
+                    <span class="font-medium text-gray-700 w-40">Email:</span>
+                    <span class="text-gray-900" id="userEmail">66160000@go.buu.ac.th</span>
+                  </div>
+                  <div class="flex">
+                    <span class="font-medium text-gray-700 w-40">Department:</span>
+                    <span class="text-gray-900" id="department">Accounting</span>
+                  </div>
+                  <div class="flex">
+                    <span class="font-medium text-gray-700 w-40">Priority:</span>
+                    <span class="text-gray-900" id="priority">High</span>
+                  </div>
+                  <div class="flex">
+                    <span class="font-medium text-gray-700 w-40">Assigned to:</span>
+                    <span class="text-gray-900" id="assignedTo"></span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Description Section -->
+              <div class="bg-white rounded-lg shadow-sm p-6">
+                <div class="flex items-center justify-between mb-4">
+                  <h2 class="text-lg font-semibold text-gray-900">
+                    Description
+                  </h2>
+                  <span id="ticketSubStatus"
+                    class="px-3 py-1 bg-green-500 text-white rounded-md text-xs font-medium"
+                  >
+                    Waiting for assignment
+                  </span>
+                </div>
+                <p id="description" class="text-gray-700 leading-relaxed">
+                  เปิดเครื่องแล้วไม่ไฟขึ้น หน่วงไม่กำลาน
+                </p>
+
+                <!-- Attachments -->
+                <div class="mt-6" id="attachments-section">
+                  <h3 class="text-sm font-medium text-gray-700 mb-2">
+                    Attachments:
+                  </h3>
+                  <div id="attachments-list">
+                    <div class="flex items-center gap-2 text-blue-600 hover:text-blue-700 cursor-pointer">
+                      <i class="fas fa-paperclip"></i>
+                      <span class="text-sm">screenshot.png</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Section - Comments -->
+            <div class="lg:col-span-1">
+              <div class="bg-white rounded-lg shadow-sm p-6 h-full flex flex-col">
+                <h2 class="text-lg font-semibold text-gray-900 mb-4">
+                  Comments
+                </h2>
+
+                <!-- Comments List -->
+                <div id="comments-list" class="flex-1 space-y-3 mb-4">
+                  <!-- Comments will be dynamically added here -->
+                </div>
+
+                <!-- Comment Input -->
+                <div class="border-t pt-4 mt-auto">
+                  <div class="flex items-center gap-2">
+                    <button id="attach-file" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                      <i class="fas fa-paperclip text-gray-500"></i>
+                    </button>
+                    <input
+                      type="text"
+                      id="comment-input"
+                      placeholder="Add a comment"
+                      class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                    />
+                    <button
+                      id="send-comment"
+                      class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors font-medium text-sm flex items-center gap-2"
+                    >
+                      <i class="fas fa-paper-plane"></i>
+                      Send
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed top-4 right-4 z-50"></div>
+
+    <script src="../../js/api.js"></script>
+    <script src="../../js/utils.js"></script>
+    <script>
+      (function () {
+        // อ่าน ticket id จาก query string (เช่น ?id=10)
+        const params = new URLSearchParams(window.location.search);
+        const ticketIdParam = params.get('id') || params.get('ticket') || null;
+
+        if (!ticketIdParam) {
+          showToast('ไม่พบรหัส ticket ใน URL', 'error');
+          return;
+        }
+
+        const ticketId = ticketIdParam;
+
+        // ตรวจสอบการล็อกอินก่อน (API ต้องการ token)
+        if (!isLoggedIn()) {
+          showToast('กรุณาเข้าสู่ระบบก่อน เพื่อดูรายละเอียด', 'warning');
+          setTimeout(() => {
+            window.location.href = '/frontend/pages/auth/login.html';
+          }, 1200);
+          return;
+        }
+
+        async function renderTicket() {
+          try {
+            // ดึงข้อมูล ticket จาก API
+            const res = await API.getTicketById(ticketId);
+            const ticket = res.data || res;
+
+            // กำหนดค่าลง HTML (รองรับหลายรูปแบบของ field ชื่อคอลัมน์)
+            const idVal = ticket.id || ticket.ticket_id || ticketId;
+            document.getElementById('ticketId').textContent = idVal;
+            const titleEl = document.getElementById('ticketTitle');
+            if (titleEl) titleEl.textContent = ticket.title || ticket.name || '';
+            const statusEl = document.getElementById('ticketStatus');
+            if (statusEl) statusEl.textContent = ticket.status_name || ticket.status || (ticket.status && ticket.status.toString()) || '';
+
+            const displayTicketId = document.getElementById('displayTicketId');
+            if (displayTicketId) displayTicketId.textContent = idVal;
+            const createdBy = document.getElementById('createdBy');
+            if (createdBy) createdBy.textContent = ticket.creator_name || ticket.full_name || ticket.created_by || '';
+            const userEmail = document.getElementById('userEmail');
+            if (userEmail) userEmail.textContent = ticket.creator_email || ticket.email || '';
+            const department = document.getElementById('department');
+            if (department) department.textContent = ticket.department || ticket.dept || '';
+            const priority = document.getElementById('priority');
+            if (priority) priority.textContent = ticket.priority || '';
+            const assignedTo = document.getElementById('assignedTo');
+            if (assignedTo) assignedTo.textContent = ticket.assigned_name || ticket.assigned_to_name || '';
+            const desc = document.getElementById('description');
+            if (desc) desc.textContent = ticket.description || ticket.note || '';
+
+            // Attachments
+            const attachmentsList = document.getElementById('attachments-list');
+            if (attachmentsList) {
+              attachmentsList.innerHTML = '';
+              const attachments = ticket.attachments || ticket.files || [];
+              if (!attachments || attachments.length === 0) {
+                attachmentsList.innerHTML = '<div class="text-sm text-gray-500">ไม่มีไฟล์แนบ</div>';
+              } else {
+                attachments.forEach(a => {
+                  const el = document.createElement('div');
+                  el.className = 'flex items-center gap-2 text-blue-600 hover:text-blue-700 cursor-pointer';
+                  el.innerHTML = `<i class="fas fa-paperclip"></i><span class="text-sm">${a.filename || a}</span>`;
+                  attachmentsList.appendChild(el);
+                });
+              }
+            }
+
+            // Comments
+            const commentsContainer = document.getElementById('comments-list');
+            commentsContainer.innerHTML = '';
+            const comments = ticket.comments || [];
+            if (comments.length === 0) {
+              commentsContainer.innerHTML = '<div class="text-sm text-gray-500">ยังไม่มีความคิดเห็น</div>';
+            } else {
+              comments.forEach(c => {
+                const row = document.createElement('div');
+                row.className = 'flex items-start gap-3';
+                row.innerHTML = `
+                  <div class="w-8 h-8 rounded-full bg-gray-300 flex-shrink-0"></div>
+                  <div class="flex-1">
+                    <div class="text-xs text-gray-500 mb-1">${formatDate(c.created_at || c.createdAt || c.time || '')}</div>
+                    <div class="bg-gray-100 rounded-lg px-4 py-2 min-h-[40px]"><p class="text-sm text-gray-700">${c.comment || c.comment_text || c.text || ''}</p></div>
+                  </div>
+                `;
+                commentsContainer.appendChild(row);
+              });
+            }
+
+          } catch (err) {
+            console.error(err);
+            showToast(err.message || 'ไม่สามารถโหลดข้อมูล ticket ได้', 'error');
+          }
+        }
+
+        // ส่ง comment
+        async function handleSendComment() {
+          const input = document.getElementById('comment-input');
+          if (!input) return;
+          const text = input.value.trim();
+          if (!text) return;
+          try {
+            await API.addComment(ticketId, text);
+            showToast('ส่งความคิดเห็นเรียบร้อย', 'success');
+            input.value = '';
+            // รีโหลด comments
+            await renderTicket();
+          } catch (err) {
+            console.error(err);
+            showToast(err.message || 'ส่งความคิดเห็นไม่สำเร็จ', 'error');
+          }
+        }
+
+        // ผูก event ให้ปุ่มส่ง
+        document.getElementById('send-comment')?.addEventListener('click', handleSendComment);
+        document.getElementById('comment-input')?.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') handleSendComment();
+        });
+
+        // โหลดข้อมูลเมื่อหน้าเปิด
+        renderTicket();
+      })();
+    </script>
+  </body>
+</html>
