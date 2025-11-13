@@ -14,7 +14,7 @@ CREATE TABLE tickets (
     ticket_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,                     -- ผู้สร้าง ticket
     assigned_to INT,                          -- ผู้รับ ticket (staff)
-    title VARCHAR(100) NOT NULL,
+    title VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
     priority ENUM('low', 'medium', 'high', 'urgent') DEFAULT 'medium',
     status ENUM('open', 'in_progress', 'resolved', 'closed') DEFAULT 'open',
