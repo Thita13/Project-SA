@@ -35,3 +35,10 @@ CREATE TABLE comments (
     FOREIGN KEY (ticket_id) REFERENCES tickets(ticket_id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
+
+-- เพิ่มข้อมูลเริ่มต้นในตาราง users
+INSERT INTO users (username, email, password, role)
+VALUES
+('admin', 'admin@example.com', SHA2('admin123', 256), 'admin'),
+('staff1', 'staff1@example.com', SHA2('staff123', 256), 'staff'),
+('user1', 'user1@example.com', SHA2('user123', 256), 'user');

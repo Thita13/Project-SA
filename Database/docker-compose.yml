@@ -42,7 +42,7 @@ services:
       - "8888:80"
     depends_on:
       mysql:
-        condition: service_healthy
+        condition: service_healthy # รอ mysql พร้อม
     networks:
       - it_ticket_network
 
